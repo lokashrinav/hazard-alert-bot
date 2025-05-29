@@ -1,19 +1,12 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 
-app = FastAPI()
+app = FastAPI(title="Hazard Alert Bot")
 
-class HazardReport(BaseModel):
-    lat: float
-    lon: float
-    description: str
-    photo_url: str | None = None
-
-@app.get("/health")      # simple liveness probe
-async def health():
-    return {"status": "ok"}
-
-@app.post("/report")
-async def create_report(report: HazardReport):
-    # TODO: call Open311 endpoint here
-    return {"queued": True, "detail": report.dict()}
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "service": "hazard-alert-bot",
+        "version": "1.0.0"
+    }
