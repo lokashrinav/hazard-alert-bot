@@ -1,9 +1,7 @@
 from fastapi.testclient import TestClient
 from backend.app.main import app
 
-client = TestClient(app)
-
-def test_health_check():
+def test_health_check(client):
     """Test the health check endpoint returns correct response"""
     response = client.get("/health")
     

@@ -5,4 +5,4 @@ from backend.app.main import app
 @pytest.fixture
 def client():
     """Test client fixture"""
-    return TestClient(app)
+    return TestClient(app)  # Pass app as a positional argument, not keyword
